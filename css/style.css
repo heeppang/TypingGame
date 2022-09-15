@@ -1,0 +1,519 @@
+@font-face {
+    font-family: "Hanna";
+    src: url("../font/BMHANNAPro.ttf");
+}
+
+@font-face {
+    font-family: "Dohyeon";
+    src: url("../font/BMDOHYEON_ttf.ttf");
+}
+
+@font-face {
+    font-family: "HannaAir";
+    src: url("../font/BMHANNAAir_ttf.TTF");
+}
+
+@font-face {
+    font-family: "Hanna11";
+    src: url("../font/BMHANNA_11yrs_ttf.ttf");
+}
+
+@font-face {
+    font-family: "Elephant";
+    src: url("../font/ELEPHANT.TTF");
+}
+
+@keyframes vibration {
+    from {
+        transform: rotate(1deg);
+    }
+
+    to {
+        transform: rotate(-1deg);
+    }
+}
+
+/* 바디 */
+* {
+    /*초기화*/
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    /*flexible block*/
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden;
+}
+
+.header {
+    width: 100%;
+    background: #ffcdfc;
+    color: white;
+    text-align: center;
+    font-family: Hanna;
+    font-size: 1.4em;
+    padding: 1rem;
+    /*16px*/
+}
+
+.header h1 {
+    display: inline-flex;
+    background-image: -webkit-linear-gradient(340deg, #ff60f7, #e100ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-animation: hue 5s infinite linear;
+    z-index: 9999;
+}
+
+.movingtitle {
+    animation: none;
+    animation-name: text1;
+    animation-duration: 1s;
+    animation-delay: 0.5s;
+    animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+    /* 수치변형함수 */
+    animation-fill-mode: both;
+}
+
+@-webkit-keyframes hue {
+    from {
+        -webkit-filter: hue-rotate(0deg);
+    }
+
+    to {
+        -webkit-filter: hue-rotate(-30deg);
+    }
+}
+
+.header span {
+    font-size: 1.3em;
+}
+
+.typing {
+    /*position: absolute;*/
+    height: 100px;
+    display: inline-block;
+    animation-name: cursor;
+    animation-duration: 0.7s;
+    margin-top: 3rem;
+    font-family: Dohyeon;
+    font-size: 55px;
+    color: #ff26ed;
+}
+
+@keyframes cursor {
+    0% {
+        border-right: 1px solid #fff
+    }
+
+    50% {
+        border-right: 1px solid #000
+    }
+
+    100% {
+        border-right: 1px solid #fff
+    }
+}
+
+.word-input-box {
+    margin-top: 2rem;
+}
+
+.word-input {
+    padding: 0.5rem;
+    font-family: Dohyeon;
+    text-align: center;
+    width: 300px;
+}
+
+.game-info {
+    margin-top: 2rem;
+    font-family: Dohyeon;
+    font-size: 0.9rem;
+    display: flex;
+    justify-content: space-between;
+    width: 250px;
+}
+
+.time,
+.score {
+    display: inline-block;
+    font-size: 25px;
+}
+
+.time_duration {
+    animation: vibration .1s infinite;
+}
+
+.button {
+    width: 200px;
+    height: 45px;
+    font-family: Hanna;
+    font-size: 1.1rem;
+    background: #ff87f5;
+    box-shadow: 0 8px 15px 0 rgba(68, 12, 63, 0.37);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    margin-top: 3rem;
+    cursor: pointer;
+}
+
+.loading {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+.repeat {
+    display: inline-block;
+    font-size: 1.7rem;
+    animation: questionmark 1s infinite;
+}
+
+.over {
+    letter-spacing: 3px;
+    font-weight: 300;
+    display: inline-block;
+    opacity: 0;
+    transition: cubic-bezier(.48, -0.23, .87, 1.62);
+    text-transform: uppercase;
+    animation-duration: .5s;
+    animation-name: dropIn;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+
+.over.delay {
+    animation-delay: .5s;
+}
+
+
+@keyframes dropIn {
+    0% {
+        opacity: 0;
+        transform: translate3d(0, -60vh, 0);
+    }
+
+    75% {
+        opacity: 1;
+        transform: translate3d(0, 1.5vh, 0);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+/* 모달 부분 */
+/* 최종 점수 */
+#modal.modal-overlay {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(1.5px);
+    -webkit-backdrop-filter: blur(1.5px);
+    border-radius: 10px;
+    z-index: 10000;
+}
+
+#modal .modal-window {
+    background: rgba(69, 139, 197, 0.70);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(13.5px);
+    -webkit-backdrop-filter: blur(13.5px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    width: 400px;
+    height: 250px;
+    position: relative;
+    top: -100px;
+    padding: 10px;
+    font-family: 'Hanna';
+}
+
+#modal .content {
+    /*내용*/
+    width: 80%;
+    height: 90%;
+    margin: 0px auto;
+    text-align: center;
+    font-size: 1.5em;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px gray;
+    color: white;
+    position: relative;
+    top: 20%;
+    line-height: 2em;
+}
+
+#modal .content p {
+    width: 100%;
+    font-weight: lighter;
+}
+
+#modal .close-area {
+    /*x버튼*/
+    display: inline;
+    font-size: 1.3em;
+    float: right;
+    padding-right: 10px;
+    cursor: pointer;
+    text-shadow: 1px 1px 2px gray;
+    color: white;
+}
+
+#ppangduckimg {
+    width: 210px;
+    height: 210px;
+    position: absolute;
+    margin-top: 150px;
+    margin-left: 400px;
+    animation: fadein 1.5s, imgani 2s;
+}
+
+/* 중간 팝업*/
+#score-alert.overlay {
+    width: 100%;
+    height: 800px;
+    position: absolute;
+    visibility: hidden;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: visible;
+    box-shadow: 0 8px 32px 0 rgba(19, 255, 165, 0.2);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(1.5px);
+    border-radius: 10px;
+    z-index: 10000;
+    background-image: url("../img/빵빵덕.png");
+    background-size: 600px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.alert {
+    /*내용*/
+    margin: 0px auto;
+    text-align: center;
+    font-size: 13em;
+    text-shadow: 3px 3px 15px rgb(255, 122, 215), -3px -3px 15px rgb(255, 122, 215),
+        -3px 3px 15px rgb(255, 122, 215), 3px -3px 15px rgb(255, 122, 215);
+    color: white;
+    position: relative;
+    font-family: 'Hanna';
+}
+
+.score-moving {
+    animation: score 4s;
+    animation-timing-function: cubic-bezier(.35, -0.61, .44, 1.06);
+}
+
+.score-fadeout {
+    animation: fadeout 4s linear;
+}
+
+/*footer*/
+footer {
+    width: 100%;
+    display: flex;
+    position: relative;
+    justify-content: flex-start;
+}
+
+.ppangppangduck1 {
+    width: 300px;
+    height: 300px;
+    background-image: url(../img/멍~.png);
+    background-size: 300px;
+    margin-right: auto;
+    visibility: hidden;
+    z-index: -1;
+}
+
+@keyframes vibration {
+    from {
+        transform: rotate(2deg);
+    }
+
+    to {
+        transform: rotate(-2deg);
+    }
+}
+
+.ppangppangduck2 {
+    width: 200px;
+    height: 300px;
+    background-image: url(../img/보고있덕.png);
+    background-size: 300px;
+    margin-left: auto;
+    overflow: hidden;
+    z-index: -1;
+
+}
+
+p#hurry,
+p#watching {
+    font-family: Hanna11;
+    color: #ff87f5;
+    font-size: 35px;
+    text-shadow: 3px 2px 2px rgb(22, 22, 15), 0px 1px rgb(22, 22, 15), 1px 0px rgb(22, 22, 15), 0px -1px rgb(22, 22, 15);
+    z-index: -1;
+}
+
+p#hurry {
+    visibility: hidden;
+    text-align: center;
+    position: absolute;
+    margin-left: 25px;
+}
+
+.hurryUp {
+    animation: mm 1s infinite, vibration .1s infinite;
+    -webkit-animation: mm 1s infinite;
+}
+
+p#watching {
+    display: flex;
+    position: absolute;
+    right: 0;
+}
+
+.move {
+    animation:
+        vibration .07s infinite,
+        fadein 2s;
+}
+
+.slide {
+    width: 270px;
+    transition-delay: 2s;
+    transition: 2s cubic-bezier(.42, .36, .54, 2);
+}
+
+.pSlide {
+    width: 280px;
+    transition-delay: 2s;
+    animation: box-ani 2s cubic-bezier(0, -0.24, .15, .66) infinite;
+    overflow: hidden;
+}
+
+/* keyframe들 */
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeout {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes questionmark {
+    0% {
+        transform: rotate(-0.05turn);
+
+    }
+
+    50% {
+        transform: rotate(0.05turn) scale(1.2);
+    }
+
+    100% {
+        transform: rotate(-0.05turn);
+    }
+}
+
+@keyframes score {
+    0% {
+        /* transform: rotate(-0.25turn); */
+    }
+
+    100% {
+        transform: rotate(0.7turn) scale(0);
+    }
+}
+
+@keyframes box-ani {
+    50% {
+        transform: translateX(100px) scale(1.2);
+    }
+}
+
+@keyframes imgani {
+    50% {
+        transform: scale(1.5);
+    }
+}
+
+@keyframes mm {
+    50% {
+        transform: scale(1.2, 1.2);
+        color: red;
+    }
+}
+
+@-webkit-keyframes mm {
+    50% {
+        -webkit-transform: scale(1.2, 1.2);
+        color: red;
+
+    }
+}
+
+@keyframes text1 {
+    0% {
+        opacity: 0;
+        transform: translateY(0);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(-50px);
+    }
+}
+
+/* 폭죽 */
+#jsfirework {
+    background-image: url("../img/밤하늘.jpg");
+    background-size: 1100px 800px;
+    visibility: hidden;
+    position: absolute;
+    top: 0;
+    display: flex;
+    z-index: 0;
+}
