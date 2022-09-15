@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>index</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <canvas id="jsfirework" width="1100px" height="800px"></canvas>
+    <div class="header">
+        <span>🐣</span>
+        <h1>영타왕 빵빵덕을 이겨라!!</h1><span>🐣</span>
+    </div>
+    <!--표제어-->
+    <p class="typing"></p>
+    <div id="modal" class="modal-overlay">
+        <div class="modal-window">
+            <div class="close-area">X</div>
+            <div class="content">
+            </div>
+        </div>
+        <img id="ppangduckimg" />
+    </div>
+    <div id="score-alert" class="overlay">
+        <div class="alert">난이도 상승이덕🐥<br />5초 안에 풀기~~
+        </div>
+    </div>
+    </div>
+    <!--input box-->
+    <div class="word-input-box">
+        <input type="text" class="word-input" />
+    </div>
+
+    <div class="game-info">
+        <div>남은시간: <span class="time">0</span>초</div>
+        <div>획득점수: <span class="score">0</span>점</div>
+    </div>
+    <button class="button loading" onclick="run()">Game Loading...</button>
+    <footer>
+        <div class="ppangppangduck1"></div>
+        <p id="hurry"></p>
+        <div class="ppangppangduck2"></div>
+        <p id="watching">지켜보고있덕 - </p>
+    </footer>
+    <script src="js/main.js"></script>
+    <script src="js/firework.js"></script>
+    <script src="js/mouse img.js"></script>
+    <script src="js/text_typing.js"></script>
+</body>
+
+</html>
