@@ -1,5 +1,6 @@
 # TypingGame
-빵빵덕 캐릭터를 적극 활용한 타이핑 게임
+<h2>빵빵덕 캐릭터를 적극 활용한 타이핑 게임</h2>
+
 ![image](https://user-images.githubusercontent.com/97587597/190341385-b1fee67f-6da3-437c-9cbb-a7e790621893.png)
 
 1. start 버튼을 누르면 시작합니다.
